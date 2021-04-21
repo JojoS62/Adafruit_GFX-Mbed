@@ -63,11 +63,11 @@ void Adafruit_SSD1306::begin(uint8_t vccstate)
     if (_reset.is_connected()) {		// reset input is not present on every SSD1306 display board, so usage is optional
         _reset = 1;
         // VDD (3.3V) goes high at start, lets just chill for a ms
-        wait_ms(1);
+        wait_us(1000);
         // bring reset low
         _reset = 0;
         // wait 10ms
-        wait_ms(10);
+        wait_us(10000);
         // bring out of reset
         _reset = 1;
         // turn on VCC (9V?)
@@ -326,7 +326,7 @@ void Adafruit_SSD1306_Spi::sendDisplayBuffer()
  *
  */
 
-Adafruit_SSD1306_I2c::Adafruit_SSD1306_I2c(I2C &i2c, PinName RST, uint8_t i2cAddress, uint8_t rawHeight, uint8_t rawWidth, bool flipVertical)
+Adafruit_SSD1306_I2C::Adafruit_SSD1306_I2C(I2C &i2c, PinName RST, uint8_t i2cAddress, uint8_t rawHeight, uint8_t rawWidth, bool flipVertical)
 	    : Adafruit_SSD1306(RST, rawHeight, rawWidth, flipVertical)
 	    , mi2c(i2c)
 	    , mi2cAddress(i2cAddress)
@@ -336,7 +336,7 @@ Adafruit_SSD1306_I2c::Adafruit_SSD1306_I2c(I2C &i2c, PinName RST, uint8_t i2cAdd
 	display();
 }
 
-void Adafruit_SSD1306_I2c::command(uint8_t c)
+void Adafruit_SSD1306_I2C::command(uint8_t c)
 {
 	char buff[2];
 	buff[0] = 0; // Command Mode
@@ -344,7 +344,7 @@ void Adafruit_SSD1306_I2c::command(uint8_t c)
 	mi2c.write(mi2cAddress, buff, sizeof(buff));
 }
 
-void Adafruit_SSD1306_I2c::data(uint8_t c)
+void Adafruit_SSD1306_I2C::data(uint8_t c)
 {
 	char buff[2];
 	buff[0] = 0x40; // Data Mode
@@ -352,7 +352,7 @@ void Adafruit_SSD1306_I2c::data(uint8_t c)
 	mi2c.write(mi2cAddress, buff, sizeof(buff));
 }
 
-void Adafruit_SSD1306_I2c::sendDisplayBuffer()
+void Adafruit_SSD1306_I2C::sendDisplayBuffer()
 {
 	char buff[17];
 	buff[0] = 0x40; // Data Mode

@@ -42,11 +42,11 @@ void Adafruit_UC1601S::begin() {
 	if (_reset.is_connected()) {// reset input is not present on every UC1601S display board, so usage is optional
 		_reset = 1;
 		// VDD (3.3V) goes high at start, lets just chill for a ms
-		wait_ms(1);
+		wait_us(1000);
 		// bring reset low
 		_reset = 0;
 		// wait 10ms
-		wait_ms(10);
+		wait_us(10000);
 		// bring out of reset
 		_reset = 1;
 		// turn on VCC (9V?)
