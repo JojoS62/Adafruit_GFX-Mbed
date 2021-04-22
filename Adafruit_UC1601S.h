@@ -24,6 +24,14 @@ All text above, and the splash screen must be included in any redistribution
 #include <vector>
 #include <algorithm>
 
+#ifndef _BV
+#define _BV(bit) (1<<(bit))
+#endif
+
+#define BLACK 0
+#define WHITE 1
+
+
 /** The pure base class for the UC1601S display driver.
  *
  * You should derive from this for a new transport interface type,

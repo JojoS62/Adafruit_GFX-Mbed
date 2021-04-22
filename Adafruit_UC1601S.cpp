@@ -76,24 +76,24 @@ void Adafruit_UC1601S::drawPixel(int16_t x, int16_t y, uint16_t color) {
 	switch (getRotation()) {
 	case 1:
 		swap(x, y);
-		x = _rawWidth - x - 1;
+		x = _width - x - 1;
 		break;
 	case 2:
-		x = _rawWidth - x - 1;
-		y = _rawHeight - y - 1;
+		x = _width - x - 1;
+		y = _height - y - 1;
 		break;
 	case 3:
 		swap(x, y);
-		y = _rawHeight - y - 1;
+		y = _height - y - 1;
 		break;
 	}
 
 	// x is which column
 	if (color == WHITE)
-		buffer[x + (y / 8) * _rawWidth] |= _BV((y % 8));
+		buffer[x + (y / 8) * _width] |= _BV((y % 8));
 	else
 		// else black
-		buffer[x + (y / 8) * _rawWidth] &= ~_BV((y % 8));
+		buffer[x + (y / 8) * _width] &= ~_BV((y % 8));
 }
 
 void Adafruit_UC1601S::invertDisplay(bool i) {
@@ -197,7 +197,7 @@ void Adafruit_UC1601S::splash(void) {
 
 	std::copy(
 			&adaFruitLogo[0]
-			, &adaFruitLogo[0] + (_rawHeight == 32 ? sizeof(adaFruitLogo)/2 : sizeof(adaFruitLogo))
+			, &adaFruitLogo[0] + (_height == 32 ? sizeof(adaFruitLogo)/2 : sizeof(adaFruitLogo))
 			, buffer.begin()
 	);
 #endif

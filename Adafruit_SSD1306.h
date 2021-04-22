@@ -29,6 +29,13 @@ All text above, and the splash screen must be included in any redistribution
 #include <vector>
 #include <algorithm>
 
+#ifndef _BV
+#define _BV(bit) (1<<(bit))
+#endif
+
+#define BLACK 0
+#define WHITE 1
+
 #define SSD1306_EXTERNALVCC 0x1
 #define SSD1306_SWITCHCAPVCC 0x2
 
