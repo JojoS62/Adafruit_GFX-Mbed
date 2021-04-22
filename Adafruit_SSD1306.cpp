@@ -357,13 +357,7 @@ void Adafruit_SSD1306_I2C::sendDisplayBuffer()
 	char buff[17];
 	buff[0] = 0x40; // Data Mode
 
-	// send display buffer in 16 byte chunks
-	for(uint16_t i=0, q=buffer.size(); i<q; i+=16 )
-	{	uint8_t x ;
+    mi2c.write(mi2cAddress, buff, 1, true);
 
-		// TODO - this will segfault if buffer.size() % 16 != 0
-		for(x=1; x<sizeof(buff); x++)
-			buff[x] = buffer[i+x-1];
-		mi2c.write(mi2cAddress, buff, sizeof(buff));
-	}
+	mi2c.write(mi2cAddress, (const char*)buffer.data(), buffer.size());
 }
