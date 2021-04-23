@@ -354,10 +354,8 @@ void Adafruit_SSD1306_I2C::data(uint8_t c)
 
 void Adafruit_SSD1306_I2C::sendDisplayBuffer()
 {
-	char buff[17];
-	buff[0] = 0x40; // Data Mode
+	char cmd = 0x40; // Data Mode
 
-    mi2c.write(mi2cAddress, buff, 1, true);
-
+    mi2c.write(mi2cAddress, &cmd, 1, true);
 	mi2c.write(mi2cAddress, (const char*)buffer.data(), buffer.size());
 }
